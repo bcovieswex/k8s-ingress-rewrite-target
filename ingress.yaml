@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: bp-stage
+  namespace: <namespace>
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/configuration-snippet: |
       rewrite ^/$ /<new-location> permanent;
-  name: ifcs-web-ols-v3-ext
+  name: <ingress-name>
 spec:
   tls:
   - hosts:
