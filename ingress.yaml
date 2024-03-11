@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: bp-stage
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      rewrite ^/$ /<new-location> permanent;
+  name: ifcs-web-ols-v3-ext
+spec:
+  tls:
+  - hosts:
+    - <your-host-name>
+    secretName: <your-host-name>-tls
+  rules:
+    - host: <your-host-name>
+      http:
+        paths:
+          - path: / # this will take the root dir and redirect it
+            pathType: Prefix
+            backend:
+              service:
+                name: <svc-name>
+                port:
+                  number: 80
